@@ -1,0 +1,182 @@
+﻿<UserControl x:Class="监狱AB门WPF.Views.InfoExternalPersonnelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:监狱AB门WPF.Views"
+             xmlns:converters="clr-namespace:监狱AB门WPF.Converters"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <converters:BoolToStringConverter x:Key="boolToString" />
+        <converters:Base64ToImageConverter  x:Key="Base64ToImage" />
+        <converters:NoDataStringConverter x:Key="nodata" />
+        <converters:BoolToBrushConverter x:Key="boolToBrush" />
+    </UserControl.Resources>
+    <Grid Background="#87CEFA">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.05*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Button Width="auto"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="0,10,5,0"
+                FontSize="15"
+                ToolTip="刷新"
+                Command="{Binding ExexuteUpdateCommad}"
+                Cursor="Hand">
+            <Label VerticalAlignment="Center"
+                   Content="{materialDesign:PackIcon Refresh,Size=20 }" />
+            <Button.Background>
+                <LinearGradientBrush>
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Offset="0.0"
+                                      Color="#3793FF" />
+                        <GradientStop Offset="1.0"
+                                      Color="#0017e4" />
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <ScrollViewer Margin="0,10,0,10"
+                      Grid.Row="1">
+            <ItemsControl ItemsSource="{Binding externalPersonInfos }">
+                <ItemsControl.Background>
+                    <VisualBrush>
+                        <VisualBrush.Visual>
+                            <TextBlock    Text="{Binding DataCount ,Converter={StaticResource nodata}}" />
+                        </VisualBrush.Visual>
+                        <VisualBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX=".1"
+                                                ScaleY=".1"
+                                                CenterX=".5"
+                                                CenterY=".5" />
+                            </TransformGroup>
+                        </VisualBrush.RelativeTransform>
+                    </VisualBrush>
+                </ItemsControl.Background>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Center" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border   CornerRadius="5"
+                                  Margin="5">
+                            <Border.Background>
+                                <LinearGradientBrush>
+                                    <LinearGradientBrush.GradientStops>
+                                        <GradientStop Offset="0.0"
+                                                      Color="#3793FF" />
+                                        <GradientStop Offset="1.0"
+                                                      Color="#0017e4" />
+                                    </LinearGradientBrush.GradientStops>
+                                </LinearGradientBrush>
+
+                            </Border.Background>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Margin="0,5,0,10">
+                                        <TextBlock Text="{Binding typeExternalPerson}"
+                                                   Margin="0,0,15,0" />
+                                        <TextBlock Text="{Binding isPass,Converter={StaticResource boolToString}}"
+                                                   Foreground="{Binding isPass,Converter={StaticResource boolToBrush}}" 
+                                                   FontSize="25"
+                                                   />
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal"
+                                                Grid.Row="1"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                        <Image Source="{Binding  base64RealPhoto,Converter={StaticResource Base64ToImage} }"
+                                               Width="100"
+                                               Height="100"
+                                               Margin="0,0,5,0"
+                                               Stretch="Fill" />
+                                        <Image Source="{Binding  identiPhoto,Converter={StaticResource Base64ToImage} }"
+                                               Width="100"
+                                               Height="100"
+                                               Stretch="Uniform" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal"
+                                                Grid.Row="2"
+                                                Margin="30,10,0,10">
+                                        <TextBlock Text="实时照片"
+                                                   HorizontalAlignment="Left" />
+                                        <TextBlock Text="证件照片"
+                                                   HorizontalAlignment="Right"
+                                                   Margin="50,10,0,10" />
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0"
+                                                Orientation="Horizontal"
+                                                Margin="5,10,0,10">
+                                        <TextBlock Text="人员姓名：" />
+                                        <TextBlock Text="{Binding name }" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="1"
+                                                Orientation="Horizontal"
+                                                Margin="5,10,0,10">
+                                        <TextBlock Text="车牌号：" />
+                                        <TextBlock Text="{Binding busNum }" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="2"
+                                                Margin="5,10,5,20"
+                                                Orientation="Horizontal"
+                                                VerticalAlignment="Center">
+                                        <Button Content="同意"
+                                                Background="Green"
+                                                Command="{Binding DataContext.ExecuteCommandSuccess,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ItemsControl}}"
+                                                CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center" />
+                                        <Button Content="拒绝"
+                                                Background="Red"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Command="{Binding DataContext.ExecuteCommandDefeat,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ItemsControl}}"
+                                                CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}" />
+                                        <Button Content="详细资料"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Right"
+                                                Command="{Binding DataContext.ExecuteCommandDetail,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ItemsControl}}"
+                                                CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}" />
+                                        <!--<Button Content="一键同意"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Right"></Button>-->
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

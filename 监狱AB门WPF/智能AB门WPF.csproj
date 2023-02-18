@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	  
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+	  <OutputType>Exe</OutputType>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Images\123 - 复制.png" />
+    <None Remove="Images\123.png" />
+    <None Remove="Images\user - 复制.jpg" />
+    <None Remove="Images\user.jpg" />
+    <None Remove="Images\w.png" />
+    <None Remove="Images\框.png" />
+    <None Remove="Images\框2.png" />
+    <None Remove="Service\HUHttpClientHelp.cs~RF10a8a21.TMP" />
+    <None Remove="Views\RefuseView.xaml~RF16c70e.TMP" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Lierda.WPFHelper" Version="1.0.3" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.6.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Panuon.WPF.UI" Version="1.1.6.5" />
+    <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
+    <PackageReference Include="Rubyer" Version="2.5.9" />
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\123 - 复制.png" />
+    <Resource Include="Images\123.png" />
+    <Resource Include="Images\user - 复制.jpg" />
+    <Resource Include="Images\user.jpg" />
+    <Resource Include="Images\w.png" />
+    <Resource Include="Images\框.png" />
+    <Resource Include="Images\框2.png" />
+  </ItemGroup>
+</Project>
